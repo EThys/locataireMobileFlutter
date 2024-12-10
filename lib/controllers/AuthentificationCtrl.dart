@@ -49,9 +49,12 @@ class AuthentificationCtrl with ChangeNotifier {
       var temp_user = response.data?["user"] ?? {};
       print("ELOOOOOOOOOUUUUUUUUU ${temp_user}");
       user = RegisterModel.fromJson(temp_user);
-      stockage?.write(
+      var store=stockage?.write(
           StockageKeys.tokenKey, response.data?['token'] ?? "");
       notifyListeners();
+      var _token=stockage?.read(StockageKeys.tokenKey);
+      print("ESIMBIEEEEEE: ${user}");
+      print("ESIMBIEEEEEE koooooooooooooo: ${_token}");
 
     }
     print(response.data);
@@ -82,31 +85,18 @@ class AuthentificationCtrl with ChangeNotifier {
     }
   }
 
-  // Future<HttpResponse> logout(Map data) async {
-  //   var url = "${Endpoints.logout}";
-  //   var tkn = stockage?.read(StockageKeys.tokenKey);
-  //   HttpResponse response = await postData(url, data, token: tkn);
-  //   if (response.status) {
-  //     notifyListeners();
-  //   }
-  //   print(response.data);
-  //   /*
-  //   NotificationController notificationController=NotificationController();
-  //   notificationController.shutDown();*/
-  //   return response;
-  // }
-  // Future<HttpResponse> changerPassword(Map data) async {
-  //   var url = "${Endpoints.changerPassword}";
-  //   HttpResponse response = await postData(url, data);
-  //   print("hhhhhhhhhhhhhhhhhh$response");
-  //   if (response.status) {
-  //     var tkn = stockage?.read(StockageKeys.tokenKey);
-  //     print("================== ${response.data}");
-  //     print("mot de passe changer avec success");
-  //   }
-  //   print(response.data);
-  //   return response;
-  // }
+  Future<HttpResponse> logout(Map data) async {
+    var url = "${Endpoints.logout}";
+    var tkn = stockage?.read(StockageKeys.tokenKey);
+    HttpResponse response = await postData(url, data, token: tkn);
+    if (response.success) {
+      print("${response.success}");
+      notifyListeners();
+    }
+    print(response.data);
+
+    return response;
+  }
 
 // "identifiant": "jean.dupont@example.com",
 // "password": "12345678"

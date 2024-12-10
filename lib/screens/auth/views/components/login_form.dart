@@ -76,7 +76,7 @@ class _LogInFormState extends State<LogInForm> {
 
       Future.delayed(Duration(seconds: 2), () {
         Navigator.of(context).pop();
-        // Navigator.pushReplacementNamed(context, Routes.logInScreenRoute);
+        Navigator.pushNamed(context, Routes.homeRoute);
       });
     } else {
       passwordController.clear();
