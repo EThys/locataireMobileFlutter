@@ -11,4 +11,5 @@ class StockageKeys{
   static const String approbation="APPROBATION";
   static const String demandeValide="DEMANDEVALIDE";
   static const String absenceDate="ABSENCEDATE";
+  static const String firstLaunchKey="FIRSTLAUNCH";
 }
